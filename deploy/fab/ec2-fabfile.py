@@ -33,11 +33,14 @@ import logging
 from copy_deploy_repo import copy_deploy_repo, check_unmodified
 from redeploy import cli as deploy_versions_cli, main as reset_server_main
 
+
 DEPLOYMENT_VERSIONS_ARGS = deploy_versions_cli(ip_address='skip')
+allow_uncommited = vars(DEPLOYMENT_VERSIONS_ARGS)["allow_uncommited"]
 if not 'OSPC_ANACONDA_TOKEN' in os.environ:
     raise ValueError('OSPC_ANACONDA_TOKEN must be defined in env vars')
-check_unmodified()
-#based on https://github.com/ContinuumIO/wakari-deploy/blob/master/ami_creation/fabfile.py
+if not allow_uncommited:
+    check_unmodified()
+# based on https://github.com/ContinuumIO/wakari-deploy/blob/master/ami_creation/fabfile.py
 ssh_transport = logging.getLogger("ssh.transport")
 ssh_transport.disabled = True
 log = logging.getLogger(__name__)
@@ -372,4 +375,3 @@ for instance in instances:
     with open("log_{}.log".format(instance.ip_address), 'w') as f:
         f.write(ssh_command)
     print(ssh_command)
-

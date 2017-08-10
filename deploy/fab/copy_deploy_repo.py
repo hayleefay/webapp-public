@@ -10,6 +10,8 @@ WEBAPP_REPO = d(DEPLOY_LOCAL_DIR)
 REMOTE_DEPLOY = '/home/ubuntu/deploy'
 
 def check_unmodified():
+    import pdb; pdb.set_trace()
+    assert 0
     args = 'git ls-files -m'.split()
     proc = sp.Popen(args, stdout=sp.PIPE, stderr=sp.PIPE, cwd=WEBAPP_REPO, env=os.environ)
     if proc.wait() != 0:
@@ -62,4 +64,3 @@ def copy_deploy_repo(sudo_func, put_func, run_func):
         run_func('cd {} && cp reset_server.sh {}'.format(os.path.join(REMOTE_DEPLOY, 'fab'), remote_reset_server))
     finally:
         shutil.rmtree(os.path.dirname(tmp))
-
