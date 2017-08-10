@@ -16,8 +16,8 @@ from bokeh.resources import CDN
 from styles import (PLOT_FORMATS, TITLE_FORMATS, RED, BLUE)
 
 def bubble_plot_tabs(tables):
-    #load data as DataFrame
-    #df = 
+    # create a copy for safety
+    tables = tables.copy()
 
     # #remove data from Intellectual Property, Land, and Inventories Categories
     # df = df[~df['asset_category'].isin(['Intellectual Property','Land','Inventories'])].copy()

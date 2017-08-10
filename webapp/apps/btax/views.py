@@ -50,6 +50,8 @@ from .compute import DropqComputeBtax, MockComputeBtax, JobFailError
 from ..constants import (METTR_TOOLTIP, METR_TOOLTIP, COC_TOOLTIP, DPRC_TOOLTIP,
                         START_YEAR, START_YEARS)
 
+from bubble_plot.bubble_plot_tabs import bubble_plot_tabs
+
 
 dropq_compute = DropqComputeBtax()
 
