@@ -333,6 +333,12 @@ def output_detail(request, pk):
         }
         inputs = url.unique_inputs
         is_registered = True if request.user.is_authenticated() else False
+
+        # use tables var to create bokeh vis here
+        # pass tables to bokeh and then create proponents and pass them
+        # to results.html
+        js, div, cdn_js, cdn_css = bubble_plot_tabs(tables)
+
         context = tables.copy()
         context.update({
             'locals': locals(),
@@ -343,6 +349,10 @@ def output_detail(request, pk):
             'created_on': created_on,
             'first_year': first_year,
             'is_btax': True,
+            # 'js': js,
+            # 'div': div,
+            # 'cdn_js': cdn_js,
+            # 'cdn_css': cdn_css,
         })
         return render(request, 'btax/results.html', context)
 
